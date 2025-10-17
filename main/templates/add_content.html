@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Add Content - SkillSync{% endblock %}
+
+{% block content %}
+<div class="center-card">
+  <div class="card shadow p-4" style="width: 100%; max-width: 600px; border-radius: 15px;">
+    <h2 class="text-center mb-4">Add New Content</h2>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary w-100">Add Content</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+

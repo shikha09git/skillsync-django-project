@@ -1,13 +1,81 @@
+/* General Body */
 body {
-  background-color: #f8f9fa;
+    background: #f2f3f3fd;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Navbar */
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+/* Buttons */
+.btn-primary {
+    background: #6d7ced;
+    border: none;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background: #c8e645;
+}
+
+/* Course Cards */
 .course-card {
-  transition: all 0.3s ease;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
 }
 
 .course-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(171, 87, 87, 0.2);
 }
+
+.card h5 {
+    color: #dc09b9;
+}
+
+/* Forms */
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 5px rgba(13,110,253,0.3);
+}
+
+/* Centered Card Containers */
+.center-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+/* Shadow for Cards */
+.card.shadow {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Text Links */
+a {
+    text-decoration: none;
+    color: #546580;
+}
+
+a:hover {
+    color: #834f39;
+    text-decoration: underline;
+}
+
+.greeting {
+    font-size: 1.5rem;           /* Large text */
+    font-weight: 900;          /* Bold */
+    display: inline-block;      /* Needed for gradient to show */
+    background: linear-gradient(90deg, #5f0651, #af530d); /* Gradient colors */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+
+
+
 

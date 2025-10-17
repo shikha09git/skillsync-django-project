@@ -1,26 +1,79 @@
 {% extends 'base.html' %}
-{% block title %}All Courses{% endblock %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Home - SkillSync{% endblock %}
+
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-  <h2 class="fw-bold">All Courses</h2>
-  <a href="{% url 'add_course' %}" class="btn btn-primary">+ Add Course</a>
+    <h2 class="fw-bold">All Posts</h2>
+    {% if user.is_authenticated %}
+        <a href="{% url 'add_content' %}" class="btn btn-primary">+ Create Post</a>
+    {% endif %}
 </div>
 
 <div class="row">
-  {% for course in courses %}
-  <div class="col-md-4 mb-4">
-    <div class="card course-card">
-      <div class="card-body">
-        <h5 class="card-title">{{ course.title }}</h5>
-        <p class="card-text text-muted">{{ course.description|truncatewords:20 }}</p>
-        <p class="small text-end mb-0">By <strong>{{ course.user.username }}</strong></p>
-      </div>
+    {% for content in contents %}
+    <div class="col-md-6 mb-4">
+        <div class="card course-card shadow-sm p-3">
+            <h5>{{ content.title }}</h5>
+            <p>{{ content.description|truncatewords:30 }}</p>
+            <p class="small text-muted">
+                Posted by {{ content.created_by.username }} • {{ content.created_at|naturaltime }}
+            </p>
+
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <!-- Like button -->
+                {% if user.is_authenticated %}
+                <a href="{% url 'like_content' content.id %}" class="btn btn-outline-primary btn-sm">
+                    👍 {{ content.total_likes }}
+                </a>
+                {% else %}
+                <span class="btn btn-outline-secondary btn-sm disabled">
+                    👍 {{ content.total_likes }}
+                </span>
+                {% endif %}
+
+                <!-- Comment toggle -->
+                {% if user.is_authenticated %}
+                <button class="btn btn-outline-success btn-sm" type="button" 
+                        onclick="document.getElementById('comment-form-{{ content.id }}').classList.toggle('d-none')">
+                    💬 Comment
+                </button>
+                {% endif %}
+
+                <!-- Delete button -->
+                {% if user == content.created_by %}
+                <a href="{% url 'delete_content' content.id %}" class="btn btn-outline-danger btn-sm">
+                    🗑️ Delete
+                </a>
+                {% endif %}
+            </div>
+
+            <!-- Comments Section -->
+            <div id="comment-form-{{ content.id }}" class="mt-3 d-none">
+                <form method="POST" action="{% url 'add_comment' content.id %}">
+                    {% csrf_token %}
+                    <div class="input-group mb-2">
+                        <input type="text" name="body" class="form-control" placeholder="Add a comment" required>
+                        <button type="submit" class="btn btn-primary">Post</button>
+                    </div>
+                </form>
+
+                <!-- Existing comments -->
+                <div class="comments-list mt-2">
+                    {% for comment in content.comments.all %}
+                    <p class="mb-1"><strong>{{ comment.user.username }}:</strong> {{ comment.body }}</p>
+                    {% empty %}
+                    <p class="text-muted small">No comments yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
     </div>
-  </div>
-  {% empty %}
-  <p>No courses yet. Add one!</p>
-  {% endfor %}
+    {% empty %}
+    <p>No content yet. Add one!</p>
+    {% endfor %}
 </div>
 {% endblock %}
-
-

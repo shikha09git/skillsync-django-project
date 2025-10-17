@@ -28,9 +28,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ekjj+102^8*7!a0j@t0ioif&_qrs8xcgn_1t04v492ia+pao&c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ['skillsync.onrender.com', 'www.skillsync.onrender.com', '127.0.0.1', 'localhost']
-
+DEBUG = True
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
