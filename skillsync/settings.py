@@ -30,7 +30,9 @@ SECRET_KEY = 'django-insecure-ekjj+102^8*7!a0j@t0ioif&_qrs8xcgn_1t04v492ia+pao&c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['your-render-app.onrender.com']
+ALLOWED_HOSTS = ['skillsync.onrender.com', 'www.skillsync.onrender.com']
+ALLOWED_HOSTS = ['*']
+
 
 
 # Application definition
